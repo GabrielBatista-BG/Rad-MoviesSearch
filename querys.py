@@ -15,13 +15,11 @@ querys_sql={
         """,
 
     "country_rating_query":"""
-        SELECT c.country_name, AVG(m.vote_average) as avg_rating, COUNT(m.movie_id) as movie_count
-        FROM movie m
-        JOIN production_country pc ON m.movie_id = pc.movie_id
-        JOIN country c ON pc.country_id = c.country_id
-        GROUP BY c.country_name
-        HAVING movie_count > 5
-        ORDER BY avg_rating DESC
+    SELECT c.country_name, m.title, AVG(m.vote_average) AS avg_rating
+    FROM movie m
+    JOIN production_country pc ON m.movie_id = pc.movie_id
+    JOIN country c ON pc.country_id = c.country_id
+    GROUP BY c.country_name, m.title
 ;
     """,
     "movie_characters_with_actors":"""
